@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.psnapi.com.ar/ps3/api" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.psnapi.com.ar/ps3/api" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.psnapi.com.ar/ps3/api">
+      <s:element name="search_jid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="search_jidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="search_jidResult" type="tns:JID" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="JID">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERVER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExtensionDataObject" />
+      <s:element name="getPSNID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getPSNIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPSNIDResult" type="tns:PSNId" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PSNId">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvatarSmall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvatarMedium" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Avatar" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AboutMe" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Level" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Progress" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Trophies" type="tns:Trophies" />
+          <s:element minOccurs="0" maxOccurs="1" name="Games" type="tns:ArrayOfGame" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateSignature" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateGamesDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="tns:Country" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ranking" type="tns:Ranking" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryRanking" type="tns:Ranking" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:Status" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastSeen" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LevelData" type="tns:Level" />
+          <s:element minOccurs="1" maxOccurs="1" name="Plus" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="jid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="panelUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GameCompletion" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="server" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Background" type="tns:BackColor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Trophies">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Earned" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Platinum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Gold" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Silver" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Bronze" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGame">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Game" nillable="true" type="tns:Game" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Game">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdGameEurope" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Image" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Guide" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TitleOnGuide" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Progress" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrophiesCount" type="tns:Trophies" />
+          <s:element minOccurs="0" maxOccurs="1" name="Trophies" type="tns:ArrayOfTrophy" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderPlayed" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Updated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdated" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Released" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPoints" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalTrophies" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserPoints" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Stars" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reviews" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTrophy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Trophy" nillable="true" type="tns:Trophy" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Trophy">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IdTrophy" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Image" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateEarned" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrophyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Updated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hidden" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Guide" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TitleOnGuide" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Country">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IdCountry" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Culture" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bandera" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ranking">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Position" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Status">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Online" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Away" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Playing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Level">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Points" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Floor" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ceiling" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Progress" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="level" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BackColor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="R" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="G" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="B" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="A" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getLastUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLastUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLastUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGamesSince">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGamesSinceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getGamesSinceResult" type="tns:ArrayOfGame" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLastestTrophies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMax" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSince" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLastestTrophiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLastestTrophiesResult" type="tns:ArrayOfTrophy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGame">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIdGame" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getGameResult" type="tns:Game" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getGamesResult" type="tns:ArrayOfGame" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTrophies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sGameId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTrophiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTrophiesResult" type="tns:ArrayOfTrophy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getNumberListGames">
+        <s:complexType />
+      </s:element>
+      <s:element name="getNumberListGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getNumberListGamesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getListGames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sGameId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getListGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getListGamesResult" type="tns:ArrayOfGame" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getListTrophies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sGameId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getListTrophiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getListTrophiesResult" type="tns:ArrayOfTrophy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentAPIVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCurrentAPIVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentAPIVersionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrophyProgression">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPSNId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sGameId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrophyProgressionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTrophyProgressionResult" type="tns:ArrayOfTrophyProgression" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTrophyProgression">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TrophyProgression" nillable="true" type="tns:TrophyProgression" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TrophyProgression">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Date" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAVGTrophiesGames">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAVGTrophiesGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAVGTrophiesGamesResult" type="tns:ArrayOfTrophies" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTrophies">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Trophies" nillable="true" type="tns:Trophies" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JID" nillable="true" type="tns:JID" />
+      <s:element name="PSNId" nillable="true" type="tns:PSNId" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfGame" nillable="true" type="tns:ArrayOfGame" />
+      <s:element name="ArrayOfTrophy" nillable="true" type="tns:ArrayOfTrophy" />
+      <s:element name="Game" nillable="true" type="tns:Game" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfTrophyProgression" nillable="true" type="tns:ArrayOfTrophyProgression" />
+      <s:element name="ArrayOfTrophies" nillable="true" type="tns:ArrayOfTrophies" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="search_jidSoapIn">
+    <wsdl:part name="parameters" element="tns:search_jid" />
+  </wsdl:message>
+  <wsdl:message name="search_jidSoapOut">
+    <wsdl:part name="parameters" element="tns:search_jidResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDSoapIn">
+    <wsdl:part name="parameters" element="tns:getPSNID" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDSoapOut">
+    <wsdl:part name="parameters" element="tns:getPSNIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:getLastUpdate" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:getLastUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceSoapIn">
+    <wsdl:part name="parameters" element="tns:getGamesSince" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceSoapOut">
+    <wsdl:part name="parameters" element="tns:getGamesSinceResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesSoapIn">
+    <wsdl:part name="parameters" element="tns:getLastestTrophies" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesSoapOut">
+    <wsdl:part name="parameters" element="tns:getLastestTrophiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGameSoapIn">
+    <wsdl:part name="parameters" element="tns:getGame" />
+  </wsdl:message>
+  <wsdl:message name="getGameSoapOut">
+    <wsdl:part name="parameters" element="tns:getGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:getGames" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:getGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesSoapIn">
+    <wsdl:part name="parameters" element="tns:getTrophies" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesSoapOut">
+    <wsdl:part name="parameters" element="tns:getTrophiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNumberListGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:getNumberListGames" />
+  </wsdl:message>
+  <wsdl:message name="getNumberListGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:getNumberListGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:getListGames" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:getListGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesSoapIn">
+    <wsdl:part name="parameters" element="tns:getListTrophies" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesSoapOut">
+    <wsdl:part name="parameters" element="tns:getListTrophiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentAPIVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentAPIVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentAPIVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentAPIVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTrophyProgression" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTrophyProgressionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAVGTrophiesGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAVGTrophiesGames" />
+  </wsdl:message>
+  <wsdl:message name="GetAVGTrophiesGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAVGTrophiesGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="search_jidHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="search_jidHttpGetOut">
+    <wsdl:part name="Body" element="tns:JID" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:PSNId" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="iMax" type="s:string" />
+    <wsdl:part name="sSince" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="getGameHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sIdGame" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGameHttpGetOut">
+    <wsdl:part name="Body" element="tns:Game" />
+  </wsdl:message>
+  <wsdl:message name="getGamesHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesHttpGetIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="getNumberListGamesHttpGetIn" />
+  <wsdl:message name="getNumberListGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesHttpGetIn">
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesHttpGetIn">
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentAPIVersionHttpGetIn" />
+  <wsdl:message name="GetCurrentAPIVersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionHttpGetIn">
+    <wsdl:part name="sPSNId" type="s:string" />
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophyProgression" />
+  </wsdl:message>
+  <wsdl:message name="GetAVGTrophiesGamesHttpGetIn" />
+  <wsdl:message name="GetAVGTrophiesGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophies" />
+  </wsdl:message>
+  <wsdl:message name="search_jidHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="search_jidHttpPostOut">
+    <wsdl:part name="Body" element="tns:JID" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getPSNIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:PSNId" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getLastUpdateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesSinceHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="iMax" type="s:string" />
+    <wsdl:part name="sSince" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getLastestTrophiesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="getGameHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sIdGame" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGameHttpPostOut">
+    <wsdl:part name="Body" element="tns:Game" />
+  </wsdl:message>
+  <wsdl:message name="getGamesHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesHttpPostIn">
+    <wsdl:part name="sPSNID" type="s:string" />
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getTrophiesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="getNumberListGamesHttpPostIn" />
+  <wsdl:message name="getNumberListGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesHttpPostIn">
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getListGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGame" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesHttpPostIn">
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getListTrophiesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophy" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentAPIVersionHttpPostIn" />
+  <wsdl:message name="GetCurrentAPIVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionHttpPostIn">
+    <wsdl:part name="sPSNId" type="s:string" />
+    <wsdl:part name="sGameId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrophyProgressionHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophyProgression" />
+  </wsdl:message>
+  <wsdl:message name="GetAVGTrophiesGamesHttpPostIn" />
+  <wsdl:message name="GetAVGTrophiesGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrophies" />
+  </wsdl:message>
+  <wsdl:portType name="psnSoap">
+    <wsdl:operation name="search_jid">
+      <wsdl:input message="tns:search_jidSoapIn" />
+      <wsdl:output message="tns:search_jidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <wsdl:input message="tns:getPSNIDSoapIn" />
+      <wsdl:output message="tns:getPSNIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <wsdl:input message="tns:getLastUpdateSoapIn" />
+      <wsdl:output message="tns:getLastUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <wsdl:input message="tns:getGamesSinceSoapIn" />
+      <wsdl:output message="tns:getGamesSinceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <wsdl:input message="tns:getLastestTrophiesSoapIn" />
+      <wsdl:output message="tns:getLastestTrophiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <wsdl:input message="tns:getGameSoapIn" />
+      <wsdl:output message="tns:getGameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <wsdl:input message="tns:getGamesSoapIn" />
+      <wsdl:output message="tns:getGamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <wsdl:input message="tns:getTrophiesSoapIn" />
+      <wsdl:output message="tns:getTrophiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <wsdl:input message="tns:getNumberListGamesSoapIn" />
+      <wsdl:output message="tns:getNumberListGamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <wsdl:input message="tns:getListGamesSoapIn" />
+      <wsdl:output message="tns:getListGamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <wsdl:input message="tns:getListTrophiesSoapIn" />
+      <wsdl:output message="tns:getListTrophiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <wsdl:input message="tns:GetCurrentAPIVersionSoapIn" />
+      <wsdl:output message="tns:GetCurrentAPIVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <wsdl:input message="tns:GetTrophyProgressionSoapIn" />
+      <wsdl:output message="tns:GetTrophyProgressionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <wsdl:input message="tns:GetAVGTrophiesGamesSoapIn" />
+      <wsdl:output message="tns:GetAVGTrophiesGamesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="psnHttpGet">
+    <wsdl:operation name="search_jid">
+      <wsdl:input message="tns:search_jidHttpGetIn" />
+      <wsdl:output message="tns:search_jidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <wsdl:input message="tns:getPSNIDHttpGetIn" />
+      <wsdl:output message="tns:getPSNIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <wsdl:input message="tns:getLastUpdateHttpGetIn" />
+      <wsdl:output message="tns:getLastUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <wsdl:input message="tns:getGamesSinceHttpGetIn" />
+      <wsdl:output message="tns:getGamesSinceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <wsdl:input message="tns:getLastestTrophiesHttpGetIn" />
+      <wsdl:output message="tns:getLastestTrophiesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <wsdl:input message="tns:getGameHttpGetIn" />
+      <wsdl:output message="tns:getGameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <wsdl:input message="tns:getGamesHttpGetIn" />
+      <wsdl:output message="tns:getGamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <wsdl:input message="tns:getTrophiesHttpGetIn" />
+      <wsdl:output message="tns:getTrophiesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <wsdl:input message="tns:getNumberListGamesHttpGetIn" />
+      <wsdl:output message="tns:getNumberListGamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <wsdl:input message="tns:getListGamesHttpGetIn" />
+      <wsdl:output message="tns:getListGamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <wsdl:input message="tns:getListTrophiesHttpGetIn" />
+      <wsdl:output message="tns:getListTrophiesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <wsdl:input message="tns:GetCurrentAPIVersionHttpGetIn" />
+      <wsdl:output message="tns:GetCurrentAPIVersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <wsdl:input message="tns:GetTrophyProgressionHttpGetIn" />
+      <wsdl:output message="tns:GetTrophyProgressionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <wsdl:input message="tns:GetAVGTrophiesGamesHttpGetIn" />
+      <wsdl:output message="tns:GetAVGTrophiesGamesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="psnHttpPost">
+    <wsdl:operation name="search_jid">
+      <wsdl:input message="tns:search_jidHttpPostIn" />
+      <wsdl:output message="tns:search_jidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <wsdl:input message="tns:getPSNIDHttpPostIn" />
+      <wsdl:output message="tns:getPSNIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <wsdl:input message="tns:getLastUpdateHttpPostIn" />
+      <wsdl:output message="tns:getLastUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <wsdl:input message="tns:getGamesSinceHttpPostIn" />
+      <wsdl:output message="tns:getGamesSinceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <wsdl:input message="tns:getLastestTrophiesHttpPostIn" />
+      <wsdl:output message="tns:getLastestTrophiesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <wsdl:input message="tns:getGameHttpPostIn" />
+      <wsdl:output message="tns:getGameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <wsdl:input message="tns:getGamesHttpPostIn" />
+      <wsdl:output message="tns:getGamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <wsdl:input message="tns:getTrophiesHttpPostIn" />
+      <wsdl:output message="tns:getTrophiesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <wsdl:input message="tns:getNumberListGamesHttpPostIn" />
+      <wsdl:output message="tns:getNumberListGamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <wsdl:input message="tns:getListGamesHttpPostIn" />
+      <wsdl:output message="tns:getListGamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <wsdl:input message="tns:getListTrophiesHttpPostIn" />
+      <wsdl:output message="tns:getListTrophiesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <wsdl:input message="tns:GetCurrentAPIVersionHttpPostIn" />
+      <wsdl:output message="tns:GetCurrentAPIVersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <wsdl:input message="tns:GetTrophyProgressionHttpPostIn" />
+      <wsdl:output message="tns:GetTrophyProgressionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <wsdl:input message="tns:GetAVGTrophiesGamesHttpPostIn" />
+      <wsdl:output message="tns:GetAVGTrophiesGamesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="psnSoap" type="tns:psnSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="search_jid">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/search_jid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getPSNID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getLastUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGamesSince" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getLastestTrophies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getTrophies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getNumberListGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getListGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/getListTrophies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetCurrentAPIVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetTrophyProgression" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <soap:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetAVGTrophiesGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="psnSoap12" type="tns:psnSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="search_jid">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/search_jid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getPSNID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getLastUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGamesSince" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getLastestTrophies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getTrophies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getNumberListGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getListGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/getListTrophies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetCurrentAPIVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetTrophyProgression" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <soap12:operation soapAction="http://www.psnapi.com.ar/ps3/api/GetAVGTrophiesGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="psnHttpGet" type="tns:psnHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="search_jid">
+      <http:operation location="/search_jid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <http:operation location="/getPSNID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <http:operation location="/getLastUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <http:operation location="/getGamesSince" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <http:operation location="/getLastestTrophies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <http:operation location="/getGame" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <http:operation location="/getGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <http:operation location="/getTrophies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <http:operation location="/getNumberListGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <http:operation location="/getListGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <http:operation location="/getListTrophies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <http:operation location="/GetCurrentAPIVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <http:operation location="/GetTrophyProgression" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <http:operation location="/GetAVGTrophiesGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="psnHttpPost" type="tns:psnHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="search_jid">
+      <http:operation location="/search_jid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPSNID">
+      <http:operation location="/getPSNID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastUpdate">
+      <http:operation location="/getLastUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGamesSince">
+      <http:operation location="/getGamesSince" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastestTrophies">
+      <http:operation location="/getLastestTrophies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGame">
+      <http:operation location="/getGame" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGames">
+      <http:operation location="/getGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTrophies">
+      <http:operation location="/getTrophies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNumberListGames">
+      <http:operation location="/getNumberListGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListGames">
+      <http:operation location="/getListGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListTrophies">
+      <http:operation location="/getListTrophies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentAPIVersion">
+      <http:operation location="/GetCurrentAPIVersion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrophyProgression">
+      <http:operation location="/GetTrophyProgression" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAVGTrophiesGames">
+      <http:operation location="/GetAVGTrophiesGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="psn">
+    <wsdl:port name="psnSoap" binding="tns:psnSoap">
+      <soap:address location="http://www.psnapi.com.ar/ps3/api/psn.asmx" />
+    </wsdl:port>
+    <wsdl:port name="psnSoap12" binding="tns:psnSoap12">
+      <soap12:address location="http://www.psnapi.com.ar/ps3/api/psn.asmx" />
+    </wsdl:port>
+    <wsdl:port name="psnHttpGet" binding="tns:psnHttpGet">
+      <http:address location="http://www.psnapi.com.ar/ps3/api/psn.asmx" />
+    </wsdl:port>
+    <wsdl:port name="psnHttpPost" binding="tns:psnHttpPost">
+      <http:address location="http://www.psnapi.com.ar/ps3/api/psn.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
