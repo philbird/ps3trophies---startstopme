@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TrophyUpdater.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TrophyUpdater_startstop_AccessPoint" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:52665/RPCService/AccessPoint.asmx</Value>
+    </Setting>
+    <Setting Name="TrophyUpdater_psnapi_psn" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.psnapi.com.ar/ps3/api/psn.asmx</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
