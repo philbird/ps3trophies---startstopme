@@ -51,13 +51,19 @@ namespace TrophyUpdater
                             ssTrophy.Description = oTrophy.Description;
                             startstop.MessageResponse _addTrophyResponse = oAccessPoint.UpdateTrophy("", ssTrophy);
 
+                            // Now we need to link the trophies
+                            startstop.TrophyDetailStatLink oLink = new startstop.TrophyDetailStatLink();
+                            oLink.OverviewID = oResponse.ReturnID;
+                            oLink.TrophyID = _addTrophyResponse.ReturnID;
 
-                            
-
+                            startstop.MessageResponse _addLinkResponse = oAccessPoint.AssociateTrophyToStat("", oLink); 
 
                         }
-                        
+
+                        #region award trophies
                         // Now award trophies. 
+                        // Just turning this off for now
+                        /*
                         psnapi.Trophy[] oTrophiesAwarded = oPSN3.getTrophies(textBox1.Text, oGame.Id);
                         foreach (psnapi.Trophy oTrophy in oTrophiesAwarded)
                         {
@@ -67,6 +73,8 @@ namespace TrophyUpdater
                                 startstop.MessageResponse _awardtrophy = oAccessPoint.AwardTrophyByName("", 1, oTrophy.Title, oTrophy.DateEarned.GetValueOrDefault()); 
                             }
                         }
+                         */ 
+                        #endregion 
 
                     }
                     catch (Exception eX)
