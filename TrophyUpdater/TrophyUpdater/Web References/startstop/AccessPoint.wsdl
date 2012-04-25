@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://startstop.me/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://startstop.me/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://startstop.me/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://startstop.me/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://startstop.me/">
       <s:import namespace="http://microsoft.com/wsdl/types/" />
@@ -28,6 +28,40 @@
           <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="FindStatOverview">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverviewType" type="tns:OverviewType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="OverviewType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Website" />
+          <s:enumeration value="OnlineGame" />
+          <s:enumeration value="PS3" />
+          <s:enumeration value="Xbox" />
+          <s:enumeration value="Application" />
+          <s:enumeration value="Game" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="FindStatOverviewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindStatOverviewResult" type="tns:MessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnGUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="AddStatOverview">
         <s:complexType>
           <s:sequence>
@@ -48,16 +82,35 @@
           <s:element minOccurs="1" maxOccurs="1" name="DeveloperGUID" type="s1:guid" />
           <s:element minOccurs="1" maxOccurs="1" name="DeveloperID" type="s:long" />
           <s:element minOccurs="1" maxOccurs="1" name="TypeOfOverview" type="tns:OverviewType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssociatedImage" type="tns:SiteImage" />
         </s:sequence>
       </s:complexType>
-      <s:simpleType name="OverviewType">
+      <s:complexType name="SiteImage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ImageID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LinkedGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LinkedID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageType" type="tns:TypeOfImage" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageSize" type="tns:SizeOfImage" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TypeOfImage">
         <s:restriction base="s:string">
-          <s:enumeration value="Website" />
-          <s:enumeration value="OnlineGame" />
-          <s:enumeration value="PS3" />
-          <s:enumeration value="Xbox" />
-          <s:enumeration value="Application" />
-          <s:enumeration value="Game" />
+          <s:enumeration value="UserAvatar" />
+          <s:enumeration value="ApplicationImage" />
+          <s:enumeration value="DetailStatImage" />
+          <s:enumeration value="OtherAvatar" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SizeOfImage">
+        <s:restriction base="s:string">
+          <s:enumeration value="small" />
+          <s:enumeration value="medium" />
+          <s:enumeration value="large" />
+          <s:enumeration value="supersize" />
         </s:restriction>
       </s:simpleType>
       <s:element name="AddStatOverviewResponse">
@@ -67,14 +120,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="MessageResponse">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
-          <s:element minOccurs="1" maxOccurs="1" name="ReturnID" type="s:long" />
-          <s:element minOccurs="1" maxOccurs="1" name="ReturnGUID" type="s1:guid" />
-          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="UpdateTrophy">
         <s:complexType>
           <s:sequence>
@@ -96,6 +141,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="TriggerValue" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="DeveloperID" type="s:long" />
           <s:element minOccurs="1" maxOccurs="1" name="Approved" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAwardedCount" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="UpdateTrophyResponse">
@@ -239,6 +285,12 @@
   <wsdl:message name="LoginUserSoapOut">
     <wsdl:part name="parameters" element="tns:LoginUserResponse" />
   </wsdl:message>
+  <wsdl:message name="FindStatOverviewSoapIn">
+    <wsdl:part name="parameters" element="tns:FindStatOverview" />
+  </wsdl:message>
+  <wsdl:message name="FindStatOverviewSoapOut">
+    <wsdl:part name="parameters" element="tns:FindStatOverviewResponse" />
+  </wsdl:message>
   <wsdl:message name="AddStatOverviewSoapIn">
     <wsdl:part name="parameters" element="tns:AddStatOverview" />
   </wsdl:message>
@@ -287,6 +339,11 @@
       <wsdl:input message="tns:LoginUserSoapIn" />
       <wsdl:output message="tns:LoginUserSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="FindStatOverview">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search for a stat overview to see if it exists, this will return the id if found</wsdl:documentation>
+      <wsdl:input message="tns:FindStatOverviewSoapIn" />
+      <wsdl:output message="tns:FindStatOverviewSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddStatOverview">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a new website, game, application, to the startstop.me database</wsdl:documentation>
       <wsdl:input message="tns:AddStatOverviewSoapIn" />
@@ -327,6 +384,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="LoginUser">
       <soap:operation soapAction="http://startstop.me/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindStatOverview">
+      <soap:operation soapAction="http://startstop.me/FindStatOverview" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -409,6 +475,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindStatOverview">
+      <soap12:operation soapAction="http://startstop.me/FindStatOverview" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddStatOverview">
       <soap12:operation soapAction="http://startstop.me/AddStatOverview" style="document" />
       <wsdl:input>
@@ -475,10 +550,10 @@
   </wsdl:binding>
   <wsdl:service name="AccessPoint">
     <wsdl:port name="AccessPointSoap" binding="tns:AccessPointSoap">
-      <soap:address location="http://localhost:52665/RPCService/AccessPoint.asmx" />
+      <soap:address location="http://rpcservice.startstop.me/AccessPoint.asmx" />
     </wsdl:port>
     <wsdl:port name="AccessPointSoap12" binding="tns:AccessPointSoap12">
-      <soap12:address location="http://localhost:52665/RPCService/AccessPoint.asmx" />
+      <soap12:address location="http://rpcservice.startstop.me/AccessPoint.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

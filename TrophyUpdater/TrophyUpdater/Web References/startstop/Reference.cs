@@ -31,6 +31,8 @@ namespace TrophyUpdater.startstop {
         
         private System.Threading.SendOrPostCallback LoginUserOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FindStatOverviewOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AddStatOverviewOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateTrophyOperationCompleted;
@@ -87,6 +89,9 @@ namespace TrophyUpdater.startstop {
         public event LoginUserCompletedEventHandler LoginUserCompleted;
         
         /// <remarks/>
+        public event FindStatOverviewCompletedEventHandler FindStatOverviewCompleted;
+        
+        /// <remarks/>
         public event AddStatOverviewCompletedEventHandler AddStatOverviewCompleted;
         
         /// <remarks/>
@@ -137,6 +142,39 @@ namespace TrophyUpdater.startstop {
             if ((this.LoginUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LoginUserCompleted(this, new LoginUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/FindStatOverview", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public MessageResponse FindStatOverview(string APIKey, string Title, OverviewType OverviewType) {
+            object[] results = this.Invoke("FindStatOverview", new object[] {
+                        APIKey,
+                        Title,
+                        OverviewType});
+            return ((MessageResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FindStatOverviewAsync(string APIKey, string Title, OverviewType OverviewType) {
+            this.FindStatOverviewAsync(APIKey, Title, OverviewType, null);
+        }
+        
+        /// <remarks/>
+        public void FindStatOverviewAsync(string APIKey, string Title, OverviewType OverviewType, object userState) {
+            if ((this.FindStatOverviewOperationCompleted == null)) {
+                this.FindStatOverviewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFindStatOverviewOperationCompleted);
+            }
+            this.InvokeAsync("FindStatOverview", new object[] {
+                        APIKey,
+                        Title,
+                        OverviewType}, this.FindStatOverviewOperationCompleted, userState);
+        }
+        
+        private void OnFindStatOverviewOperationCompleted(object arg) {
+            if ((this.FindStatOverviewCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FindStatOverviewCompleted(this, new FindStatOverviewCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -836,6 +874,8 @@ namespace TrophyUpdater.startstop {
         
         private bool approvedField;
         
+        private System.Nullable<int> userAwardedCountField;
+        
         /// <remarks/>
         public int TrophyID {
             get {
@@ -945,6 +985,17 @@ namespace TrophyUpdater.startstop {
                 this.approvedField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> UserAwardedCount {
+            get {
+                return this.userAwardedCountField;
+            }
+            set {
+                this.userAwardedCountField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -953,55 +1004,141 @@ namespace TrophyUpdater.startstop {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
-    public partial class MessageResponse {
+    public partial class SiteImage {
         
-        private bool successField;
+        private long imageIDField;
         
-        private long returnIDField;
+        private System.Guid imageGUIDField;
         
-        private System.Guid returnGUIDField;
+        private System.Guid linkedGUIDField;
         
-        private string messageField;
+        private long linkedIDField;
+        
+        private string fileNameField;
+        
+        private TypeOfImage imageTypeField;
+        
+        private string locationField;
+        
+        private SizeOfImage imageSizeField;
         
         /// <remarks/>
-        public bool Success {
+        public long ImageID {
             get {
-                return this.successField;
+                return this.imageIDField;
             }
             set {
-                this.successField = value;
+                this.imageIDField = value;
             }
         }
         
         /// <remarks/>
-        public long ReturnID {
+        public System.Guid ImageGUID {
             get {
-                return this.returnIDField;
+                return this.imageGUIDField;
             }
             set {
-                this.returnIDField = value;
+                this.imageGUIDField = value;
             }
         }
         
         /// <remarks/>
-        public System.Guid ReturnGUID {
+        public System.Guid LinkedGUID {
             get {
-                return this.returnGUIDField;
+                return this.linkedGUIDField;
             }
             set {
-                this.returnGUIDField = value;
+                this.linkedGUIDField = value;
             }
         }
         
         /// <remarks/>
-        public string Message {
+        public long LinkedID {
             get {
-                return this.messageField;
+                return this.linkedIDField;
             }
             set {
-                this.messageField = value;
+                this.linkedIDField = value;
             }
         }
+        
+        /// <remarks/>
+        public string FileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TypeOfImage ImageType {
+            get {
+                return this.imageTypeField;
+            }
+            set {
+                this.imageTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SizeOfImage ImageSize {
+            get {
+                return this.imageSizeField;
+            }
+            set {
+                this.imageSizeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public enum TypeOfImage {
+        
+        /// <remarks/>
+        UserAvatar,
+        
+        /// <remarks/>
+        ApplicationImage,
+        
+        /// <remarks/>
+        DetailStatImage,
+        
+        /// <remarks/>
+        OtherAvatar,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public enum SizeOfImage {
+        
+        /// <remarks/>
+        small,
+        
+        /// <remarks/>
+        medium,
+        
+        /// <remarks/>
+        large,
+        
+        /// <remarks/>
+        supersize,
     }
     
     /// <remarks/>
@@ -1031,6 +1168,8 @@ namespace TrophyUpdater.startstop {
         private long developerIDField;
         
         private OverviewType typeOfOverviewField;
+        
+        private SiteImage associatedImageField;
         
         /// <remarks/>
         public long OverviewID {
@@ -1131,6 +1270,16 @@ namespace TrophyUpdater.startstop {
                 this.typeOfOverviewField = value;
             }
         }
+        
+        /// <remarks/>
+        public SiteImage AssociatedImage {
+            get {
+                return this.associatedImageField;
+            }
+            set {
+                this.associatedImageField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1159,6 +1308,63 @@ namespace TrophyUpdater.startstop {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public partial class MessageResponse {
+        
+        private bool successField;
+        
+        private long returnIDField;
+        
+        private System.Guid returnGUIDField;
+        
+        private string messageField;
+        
+        /// <remarks/>
+        public bool Success {
+            get {
+                return this.successField;
+            }
+            set {
+                this.successField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long ReturnID {
+            get {
+                return this.returnIDField;
+            }
+            set {
+                this.returnIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ReturnGUID {
+            get {
+                return this.returnGUIDField;
+            }
+            set {
+                this.returnGUIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void LoginUserCompletedEventHandler(object sender, LoginUserCompletedEventArgs e);
     
@@ -1180,6 +1386,32 @@ namespace TrophyUpdater.startstop {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ValidatedUserInfo)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void FindStatOverviewCompletedEventHandler(object sender, FindStatOverviewCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FindStatOverviewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FindStatOverviewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public MessageResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((MessageResponse)(this.results[0]));
             }
         }
     }

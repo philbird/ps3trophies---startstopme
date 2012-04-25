@@ -26,7 +26,7 @@ namespace TrophyUpdater.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:52665/RPCService/AccessPoint.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://rpcservice.startstop.me/AccessPoint.asmx")]
         public string TrophyUpdater_startstop_AccessPoint {
             get {
                 return ((string)(this["TrophyUpdater_startstop_AccessPoint"]));

@@ -130,10 +130,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:52665/RPCService/AccessPoint.asmx">
+    <WebReferenceUrl Include="http://rpcservice.startstop.me/AccessPoint.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\startstop\</RelPath>
-      <UpdateFromURL>http://localhost:52665/RPCService/AccessPoint.asmx</UpdateFromURL>
+      <UpdateFromURL>http://rpcservice.startstop.me/AccessPoint.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

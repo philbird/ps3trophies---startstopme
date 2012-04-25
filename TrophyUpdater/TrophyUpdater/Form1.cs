@@ -21,19 +21,36 @@ namespace TrophyUpdater
             startstop.AccessPoint oAccessPoint = new startstop.AccessPoint();
 
             psnapi.psn oPSN = new psnapi.psn();
+
+            // This gets the games based on the PSNID in the text box. 
             psnapi.Game[] oGames = oPSN.getGames(textBox1.Text);
             psnapi.psn oPSN2 = new psnapi.psn();
             psnapi.psn oPSN3 = new psnapi.psn(); 
 
             foreach (psnapi.Game oGame in oGames)
             {
-                startstop.StatOverView oOverview = new startstop.StatOverView();
-                oOverview.CreatedOn = DateTime.Now;
-                oOverview.Title = oGame.Title;
-                oOverview.TypeOfOverview = startstop.OverviewType.PS3;
-                oOverview.Description = oGame.Title;
-                startstop.MessageResponse oResponse = new startstop.MessageResponse(); 
-                oResponse =  oAccessPoint.AddStatOverview("", oOverview);
+
+                // Instead this should search to see if the game is already there and if not then do the add! 
+                startstop.MessageResponse oResponse = new startstop.MessageResponse();
+                oResponse = oAccessPoint.FindStatOverview("", oGame.Title, startstop.OverviewType.PS3);
+                
+                // It cannot be found 
+                if (!oResponse.Success)
+                {
+
+                    #region Add the stat Overview
+                    startstop.StatOverView oOverview = new startstop.StatOverView();
+                    oOverview.CreatedOn = DateTime.Now;
+                    oOverview.Title = oGame.Title;
+                    oOverview.TypeOfOverview = startstop.OverviewType.PS3;
+                    oOverview.Description = oGame.Title;
+
+                    // the response should be updated here. 
+                    oResponse = oAccessPoint.AddStatOverview("", oOverview);
+                    #endregion
+
+                }
+
                 if (oResponse.Success)
                 {
                     try
@@ -53,6 +70,11 @@ namespace TrophyUpdater
 
                             // Now we need to link the trophies
                             startstop.TrophyDetailStatLink oLink = new startstop.TrophyDetailStatLink();
+                          
+            // This needs to be checked! 
+                            // A few trophies have been returned linked to the incorect game. 
+                            
+                            
                             oLink.OverviewID = oResponse.ReturnID;
                             oLink.TrophyID = _addTrophyResponse.ReturnID;
 
