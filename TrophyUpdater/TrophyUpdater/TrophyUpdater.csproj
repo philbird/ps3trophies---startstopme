@@ -119,6 +119,9 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\startstop\Tasks.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\startstop\ValidatedUserInfo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

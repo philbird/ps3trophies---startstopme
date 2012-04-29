@@ -29,8 +29,6 @@ namespace TrophyUpdater.startstop {
     [System.Web.Services.WebServiceBindingAttribute(Name="AccessPointSoap", Namespace="http://startstop.me/")]
     public partial class AccessPoint : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback LoginUserOperationCompleted;
-        
         private System.Threading.SendOrPostCallback FindStatOverviewOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddStatOverviewOperationCompleted;
@@ -43,9 +41,15 @@ namespace TrophyUpdater.startstop {
         
         private System.Threading.SendOrPostCallback AwardTrophyByNameOperationCompleted;
         
+        private System.Threading.SendOrPostCallback LoginUserOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AddUserStatOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddUserStatMusicOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTaskOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SetTaskCompleteOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -86,9 +90,6 @@ namespace TrophyUpdater.startstop {
         }
         
         /// <remarks/>
-        public event LoginUserCompletedEventHandler LoginUserCompleted;
-        
-        /// <remarks/>
         public event FindStatOverviewCompletedEventHandler FindStatOverviewCompleted;
         
         /// <remarks/>
@@ -107,43 +108,19 @@ namespace TrophyUpdater.startstop {
         public event AwardTrophyByNameCompletedEventHandler AwardTrophyByNameCompleted;
         
         /// <remarks/>
+        public event LoginUserCompletedEventHandler LoginUserCompleted;
+        
+        /// <remarks/>
         public event AddUserStatCompletedEventHandler AddUserStatCompleted;
         
         /// <remarks/>
         public event AddUserStatMusicCompletedEventHandler AddUserStatMusicCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/LoginUser", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ValidatedUserInfo LoginUser(string APIKey, string Username, string Password) {
-            object[] results = this.Invoke("LoginUser", new object[] {
-                        APIKey,
-                        Username,
-                        Password});
-            return ((ValidatedUserInfo)(results[0]));
-        }
+        public event GetTaskCompletedEventHandler GetTaskCompleted;
         
         /// <remarks/>
-        public void LoginUserAsync(string APIKey, string Username, string Password) {
-            this.LoginUserAsync(APIKey, Username, Password, null);
-        }
-        
-        /// <remarks/>
-        public void LoginUserAsync(string APIKey, string Username, string Password, object userState) {
-            if ((this.LoginUserOperationCompleted == null)) {
-                this.LoginUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginUserOperationCompleted);
-            }
-            this.InvokeAsync("LoginUser", new object[] {
-                        APIKey,
-                        Username,
-                        Password}, this.LoginUserOperationCompleted, userState);
-        }
-        
-        private void OnLoginUserOperationCompleted(object arg) {
-            if ((this.LoginUserCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.LoginUserCompleted(this, new LoginUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event SetTaskCompleteCompletedEventHandler SetTaskCompleteCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/FindStatOverview", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -342,6 +319,39 @@ namespace TrophyUpdater.startstop {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/LoginUser", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ValidatedUserInfo LoginUser(string APIKey, string Username, string Password) {
+            object[] results = this.Invoke("LoginUser", new object[] {
+                        APIKey,
+                        Username,
+                        Password});
+            return ((ValidatedUserInfo)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoginUserAsync(string APIKey, string Username, string Password) {
+            this.LoginUserAsync(APIKey, Username, Password, null);
+        }
+        
+        /// <remarks/>
+        public void LoginUserAsync(string APIKey, string Username, string Password, object userState) {
+            if ((this.LoginUserOperationCompleted == null)) {
+                this.LoginUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginUserOperationCompleted);
+            }
+            this.InvokeAsync("LoginUser", new object[] {
+                        APIKey,
+                        Username,
+                        Password}, this.LoginUserOperationCompleted, userState);
+        }
+        
+        private void OnLoginUserOperationCompleted(object arg) {
+            if ((this.LoginUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoginUserCompleted(this, new LoginUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/AddUserStat", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public MessageResponse AddUserStat(string APIKey, UserStatLog oUserStat) {
             object[] results = this.Invoke("AddUserStat", new object[] {
@@ -406,6 +416,70 @@ namespace TrophyUpdater.startstop {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/GetTask", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Tasks GetTask(string APIKey, long OverviewID, string OrOtherType) {
+            object[] results = this.Invoke("GetTask", new object[] {
+                        APIKey,
+                        OverviewID,
+                        OrOtherType});
+            return ((Tasks)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTaskAsync(string APIKey, long OverviewID, string OrOtherType) {
+            this.GetTaskAsync(APIKey, OverviewID, OrOtherType, null);
+        }
+        
+        /// <remarks/>
+        public void GetTaskAsync(string APIKey, long OverviewID, string OrOtherType, object userState) {
+            if ((this.GetTaskOperationCompleted == null)) {
+                this.GetTaskOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTaskOperationCompleted);
+            }
+            this.InvokeAsync("GetTask", new object[] {
+                        APIKey,
+                        OverviewID,
+                        OrOtherType}, this.GetTaskOperationCompleted, userState);
+        }
+        
+        private void OnGetTaskOperationCompleted(object arg) {
+            if ((this.GetTaskCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTaskCompleted(this, new GetTaskCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://startstop.me/SetTaskComplete", RequestNamespace="http://startstop.me/", ResponseNamespace="http://startstop.me/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public MessageResponse SetTaskComplete(string APIKey, System.Guid TaskID) {
+            object[] results = this.Invoke("SetTaskComplete", new object[] {
+                        APIKey,
+                        TaskID});
+            return ((MessageResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SetTaskCompleteAsync(string APIKey, System.Guid TaskID) {
+            this.SetTaskCompleteAsync(APIKey, TaskID, null);
+        }
+        
+        /// <remarks/>
+        public void SetTaskCompleteAsync(string APIKey, System.Guid TaskID, object userState) {
+            if ((this.SetTaskCompleteOperationCompleted == null)) {
+                this.SetTaskCompleteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetTaskCompleteOperationCompleted);
+            }
+            this.InvokeAsync("SetTaskComplete", new object[] {
+                        APIKey,
+                        TaskID}, this.SetTaskCompleteOperationCompleted, userState);
+        }
+        
+        private void OnSetTaskCompleteOperationCompleted(object arg) {
+            if ((this.SetTaskCompleteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetTaskCompleteCompleted(this, new SetTaskCompleteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -427,68 +501,186 @@ namespace TrophyUpdater.startstop {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
     [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public enum OverviewType {
+        
+        /// <remarks/>
+        Website,
+        
+        /// <remarks/>
+        OnlineGame,
+        
+        /// <remarks/>
+        PS3,
+        
+        /// <remarks/>
+        Xbox,
+        
+        /// <remarks/>
+        Application,
+        
+        /// <remarks/>
+        Game,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
-    public partial class ValidatedUserInfo {
+    public partial class MessageResponse {
         
-        private bool validatedField;
+        private bool successField;
         
-        private System.Guid userGUIDField;
+        private long returnIDField;
         
-        private long userIDField;
+        private System.Guid returnGUIDField;
         
-        private string usernameField;
-        
-        private string emailAddressField;
+        private string messageField;
         
         /// <remarks/>
-        public bool Validated {
+        public bool Success {
             get {
-                return this.validatedField;
+                return this.successField;
             }
             set {
-                this.validatedField = value;
+                this.successField = value;
             }
         }
         
         /// <remarks/>
-        public System.Guid UserGUID {
+        public long ReturnID {
             get {
-                return this.userGUIDField;
+                return this.returnIDField;
             }
             set {
-                this.userGUIDField = value;
+                this.returnIDField = value;
             }
         }
         
         /// <remarks/>
-        public long UserID {
+        public System.Guid ReturnGUID {
             get {
-                return this.userIDField;
+                return this.returnGUIDField;
             }
             set {
-                this.userIDField = value;
+                this.returnGUIDField = value;
             }
         }
         
         /// <remarks/>
-        public string Username {
+        public string Message {
             get {
-                return this.usernameField;
+                return this.messageField;
             }
             set {
-                this.usernameField = value;
+                this.messageField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public partial class Tasks {
+        
+        private System.Guid taskIDField;
+        
+        private int taskStatusField;
+        
+        private long overviewIDField;
+        
+        private string dataToRunField;
+        
+        private System.DateTime createdOnField;
+        
+        private System.DateTime modifiedOnField;
+        
+        private System.DateTime finishedExecutionOnField;
+        
+        private string otherTypeField;
+        
+        /// <remarks/>
+        public System.Guid TaskID {
+            get {
+                return this.taskIDField;
+            }
+            set {
+                this.taskIDField = value;
             }
         }
         
         /// <remarks/>
-        public string EmailAddress {
+        public int TaskStatus {
             get {
-                return this.emailAddressField;
+                return this.taskStatusField;
             }
             set {
-                this.emailAddressField = value;
+                this.taskStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long OverviewID {
+            get {
+                return this.overviewIDField;
+            }
+            set {
+                this.overviewIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DataToRun {
+            get {
+                return this.dataToRunField;
+            }
+            set {
+                this.dataToRunField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime CreatedOn {
+            get {
+                return this.createdOnField;
+            }
+            set {
+                this.createdOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime ModifiedOn {
+            get {
+                return this.modifiedOnField;
+            }
+            set {
+                this.modifiedOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime FinishedExecutionOn {
+            get {
+                return this.finishedExecutionOnField;
+            }
+            set {
+                this.finishedExecutionOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OtherType {
+            get {
+                return this.otherTypeField;
+            }
+            set {
+                this.otherTypeField = value;
             }
         }
     }
@@ -771,6 +963,75 @@ namespace TrophyUpdater.startstop {
             }
             set {
                 this.userStatRankField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
+    public partial class ValidatedUserInfo {
+        
+        private bool validatedField;
+        
+        private System.Guid userGUIDField;
+        
+        private long userIDField;
+        
+        private string usernameField;
+        
+        private string emailAddressField;
+        
+        /// <remarks/>
+        public bool Validated {
+            get {
+                return this.validatedField;
+            }
+            set {
+                this.validatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid UserGUID {
+            get {
+                return this.userGUIDField;
+            }
+            set {
+                this.userGUIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public long UserID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                this.userIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                this.usernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EmailAddress {
+            get {
+                return this.emailAddressField;
+            }
+            set {
+                this.emailAddressField = value;
             }
         }
     }
@@ -1283,114 +1544,6 @@ namespace TrophyUpdater.startstop {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
-    public enum OverviewType {
-        
-        /// <remarks/>
-        Website,
-        
-        /// <remarks/>
-        OnlineGame,
-        
-        /// <remarks/>
-        PS3,
-        
-        /// <remarks/>
-        Xbox,
-        
-        /// <remarks/>
-        Application,
-        
-        /// <remarks/>
-        Game,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://startstop.me/")]
-    public partial class MessageResponse {
-        
-        private bool successField;
-        
-        private long returnIDField;
-        
-        private System.Guid returnGUIDField;
-        
-        private string messageField;
-        
-        /// <remarks/>
-        public bool Success {
-            get {
-                return this.successField;
-            }
-            set {
-                this.successField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public long ReturnID {
-            get {
-                return this.returnIDField;
-            }
-            set {
-                this.returnIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ReturnGUID {
-            get {
-                return this.returnGUIDField;
-            }
-            set {
-                this.returnGUIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void LoginUserCompletedEventHandler(object sender, LoginUserCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class LoginUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal LoginUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ValidatedUserInfo Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ValidatedUserInfo)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void FindStatOverviewCompletedEventHandler(object sender, FindStatOverviewCompletedEventArgs e);
     
@@ -1548,6 +1701,32 @@ namespace TrophyUpdater.startstop {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void LoginUserCompletedEventHandler(object sender, LoginUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoginUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoginUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ValidatedUserInfo Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ValidatedUserInfo)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void AddUserStatCompletedEventHandler(object sender, AddUserStatCompletedEventArgs e);
     
     /// <remarks/>
@@ -1585,6 +1764,58 @@ namespace TrophyUpdater.startstop {
         private object[] results;
         
         internal AddUserStatMusicCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public MessageResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((MessageResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetTaskCompletedEventHandler(object sender, GetTaskCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTaskCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTaskCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Tasks Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Tasks)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void SetTaskCompleteCompletedEventHandler(object sender, SetTaskCompleteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SetTaskCompleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SetTaskCompleteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

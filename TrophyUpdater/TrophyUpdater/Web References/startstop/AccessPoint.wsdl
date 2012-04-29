@@ -3,31 +3,6 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://startstop.me/">
       <s:import namespace="http://microsoft.com/wsdl/types/" />
-      <s:element name="LoginUser">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="LoginUserResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="LoginUserResult" type="tns:ValidatedUserInfo" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ValidatedUserInfo">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Validated" type="s:boolean" />
-          <s:element minOccurs="1" maxOccurs="1" name="UserGUID" type="s1:guid" />
-          <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
-          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="FindStatOverview">
         <s:complexType>
           <s:sequence>
@@ -209,6 +184,31 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="LoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginUserResult" type="tns:ValidatedUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ValidatedUserInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Validated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserGUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="AddUserStat">
         <s:complexType>
           <s:sequence>
@@ -270,6 +270,49 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetTask">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverviewID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="OrOtherType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskResult" type="tns:Tasks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Tasks">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskStatus" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OverviewID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataToRun" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedOn" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifiedOn" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FinishedExecutionOn" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetTaskComplete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetTaskCompleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetTaskCompleteResult" type="tns:MessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -279,12 +322,6 @@
       </s:simpleType>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="LoginUserSoapIn">
-    <wsdl:part name="parameters" element="tns:LoginUser" />
-  </wsdl:message>
-  <wsdl:message name="LoginUserSoapOut">
-    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
-  </wsdl:message>
   <wsdl:message name="FindStatOverviewSoapIn">
     <wsdl:part name="parameters" element="tns:FindStatOverview" />
   </wsdl:message>
@@ -321,6 +358,12 @@
   <wsdl:message name="AwardTrophyByNameSoapOut">
     <wsdl:part name="parameters" element="tns:AwardTrophyByNameResponse" />
   </wsdl:message>
+  <wsdl:message name="LoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
   <wsdl:message name="AddUserStatSoapIn">
     <wsdl:part name="parameters" element="tns:AddUserStat" />
   </wsdl:message>
@@ -333,12 +376,19 @@
   <wsdl:message name="AddUserStatMusicSoapOut">
     <wsdl:part name="parameters" element="tns:AddUserStatMusicResponse" />
   </wsdl:message>
+  <wsdl:message name="GetTaskSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTask" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetTaskCompleteSoapIn">
+    <wsdl:part name="parameters" element="tns:SetTaskComplete" />
+  </wsdl:message>
+  <wsdl:message name="SetTaskCompleteSoapOut">
+    <wsdl:part name="parameters" element="tns:SetTaskCompleteResponse" />
+  </wsdl:message>
   <wsdl:portType name="AccessPointSoap">
-    <wsdl:operation name="LoginUser">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validates a user</wsdl:documentation>
-      <wsdl:input message="tns:LoginUserSoapIn" />
-      <wsdl:output message="tns:LoginUserSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="FindStatOverview">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search for a stat overview to see if it exists, this will return the id if found</wsdl:documentation>
       <wsdl:input message="tns:FindStatOverviewSoapIn" />
@@ -369,6 +419,11 @@
       <wsdl:input message="tns:AwardTrophyByNameSoapIn" />
       <wsdl:output message="tns:AwardTrophyByNameSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validates a user</wsdl:documentation>
+      <wsdl:input message="tns:LoginUserSoapIn" />
+      <wsdl:output message="tns:LoginUserSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddUserStat">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds or UPDATES the userstat</wsdl:documentation>
       <wsdl:input message="tns:AddUserStatSoapIn" />
@@ -379,18 +434,21 @@
       <wsdl:input message="tns:AddUserStatMusicSoapIn" />
       <wsdl:output message="tns:AddUserStatMusicSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the next task in the list for an external application, for example, scan for updates or first time scan for a user of stats. This lets the site request updates externally. 
+                                When you Get a task it will mark that task as in processing. This enables you to run numerous task handlers for a single task type. 
+                                </wsdl:documentation>
+      <wsdl:input message="tns:GetTaskSoapIn" />
+      <wsdl:output message="tns:GetTaskSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTaskComplete">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets as task as having been completed once the execution has been finished</wsdl:documentation>
+      <wsdl:input message="tns:SetTaskCompleteSoapIn" />
+      <wsdl:output message="tns:SetTaskCompleteSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AccessPointSoap" type="tns:AccessPointSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="LoginUser">
-      <soap:operation soapAction="http://startstop.me/LoginUser" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="FindStatOverview">
       <soap:operation soapAction="http://startstop.me/FindStatOverview" style="document" />
       <wsdl:input>
@@ -445,6 +503,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://startstop.me/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddUserStat">
       <soap:operation soapAction="http://startstop.me/AddUserStat" style="document" />
       <wsdl:input>
@@ -463,18 +530,27 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap:operation soapAction="http://startstop.me/GetTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTaskComplete">
+      <soap:operation soapAction="http://startstop.me/SetTaskComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="AccessPointSoap12" type="tns:AccessPointSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="LoginUser">
-      <soap12:operation soapAction="http://startstop.me/LoginUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="FindStatOverview">
       <soap12:operation soapAction="http://startstop.me/FindStatOverview" style="document" />
       <wsdl:input>
@@ -529,6 +605,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap12:operation soapAction="http://startstop.me/LoginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddUserStat">
       <soap12:operation soapAction="http://startstop.me/AddUserStat" style="document" />
       <wsdl:input>
@@ -540,6 +625,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserStatMusic">
       <soap12:operation soapAction="http://startstop.me/AddUserStatMusic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap12:operation soapAction="http://startstop.me/GetTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTaskComplete">
+      <soap12:operation soapAction="http://startstop.me/SetTaskComplete" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
